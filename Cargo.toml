@@ -1,0 +1,10 @@
+[package]
+name = "realmlib_ffi"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+realmlib = "0.1"
+
+[lib]
+crate-type = ["cdylib"]
