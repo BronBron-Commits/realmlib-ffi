@@ -1,9 +1,8 @@
 use std::ffi::CStr;
-use std::os::raw::{c_char};
+use std::os::raw::c_char;
 
 #[no_mangle]
 pub extern "C" fn realmlib_init() {
-    // Later: initialize realmlib world state
     println!("[realmlib_ffi] init");
 }
 
@@ -19,12 +18,42 @@ pub extern "C" fn realmlib_add_object(
     };
 
     println!(
-        "[realmlib_ffi] add object id={} model={} bytes={}",
+        "[realmlib_ffi] add_object id={} model={} bytes={}",
         id, name, len
     );
+}
 
-    // NEXT STEP (later):
-    // realmlib::world.add_object_from_memory(...)
+#[no_mangle]
+pub extern "C" fn realmlib_update_transform(
+    id: i32,
+    x: f32,
+    y: f32,
+    z: f32,
+    yaw: f32,
+    pitch: f32,
+    roll: f32,
+) {
+    println!(
+        "[realmlib_ffi] update_transform id={} pos=({}, {}, {}) rot=({}, {}, {})",
+        id, x, y, z, yaw, pitch, roll
+    );
+}
+
+#[no_mangle]
+pub extern "C" fn realmlib_remove_object(id: i32) {
+    println!("[realmlib_ffi] remove_object id={}", id);
+}
+
+#[no_mangle]
+pub extern "C" fn realmlib_update_terrain(
+    chunk_x: i32,
+    chunk_z: i32,
+    height_count: usize,
+) {
+    println!(
+        "[realmlib_ffi] update_terrain chunk=({}, {}) points={}",
+        chunk_x, chunk_z, height_count
+    );
 }
 
 #[no_mangle]
